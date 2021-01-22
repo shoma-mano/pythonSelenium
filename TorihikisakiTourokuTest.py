@@ -22,17 +22,6 @@ if len(str(s.day))==1:
 today=month+day
 
 
-
-# ワークブックを新規作成する
-book = openpyxl.Workbook()
-
-
-# シートを取得し名前を変更する
-sheet = book.active
-sheet.title = 'First sheet'
-
-
-
 #企業ID
 companyID="109"+today
 houjin_kihon_CD = "HJ109"+today

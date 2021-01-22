@@ -6,6 +6,7 @@ import openpyxl
 import ex #make_xl(シート名,機能名)　で　/excelにexcelファイルを作成
 import postslack
 import TorihikisakiTourokuTest
+import scroll
 
 #日付文字列取得（12/1ならtodayは1201となる)
 s=datetime.datetime.now()
@@ -88,6 +89,7 @@ houjin_mei.send_keys("test")
 
 # 登録
 houjin_touroku=driver.find_element_by_xpath("/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-footer/div/div[2]/button")
+scroll.scroll(driver,houjin_touroku)
 houjin_touroku.click()
 time.sleep(1)
 
