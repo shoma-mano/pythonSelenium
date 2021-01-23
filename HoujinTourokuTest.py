@@ -73,8 +73,8 @@ def test(driver):
     
 
     #imgフォルダにスクリーンショットを保存
-    kinoumei="houjintouroku"
-    sfile = driver.get_screenshot_as_file("C:\\Users\\mano-syou\\Desktop\\python\\img\\"+today+kinoumei+"1"+".png")
+    houjintouroku=Count.makeCountObj("法人登録")
+    Screenshot.excute(houjintouroku,driver)
     time.sleep(3)
     
 
@@ -91,14 +91,18 @@ def test(driver):
 
 
     #imgフォルダにスクリーンショットを保存
-    kinoumei="houjintouroku"
-    sfile = driver.get_screenshot_as_file("C:\\Users\\mano-syou\\Desktop\\python\\img\\"+today+kinoumei+"2"+".png")
+    Screenshot.excute(houjintouroku,driver)
+    time.sleep(3)
+
+
+    #imgフォルダにスクリーンショットを保存
+    Screenshot.excute(houjintouroku,driver)
     time.sleep(3)
 
 
     #excelフォルダにhoujinエクセル作成
-    ex.make_xl(kinoumei,2)
+    ex.make_xl(houjintouroku.name,houjintouroku.number)
 
 
     #slack報告
-    postslack.SendToSlack(today+kinoumei+".xlsx","法人登録")
+    postslack.SendToSlack(today+houjintouroku.name+".xlsx","法人登録")

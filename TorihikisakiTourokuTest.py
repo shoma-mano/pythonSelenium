@@ -8,26 +8,13 @@ import postslack
 import scroll
 from selenium.webdriver.common.action_chains import ActionChains
 
-#日付文字列取得（12/1ならtodayは1201となる)
-s=datetime.datetime.now()
 
-month=str(s.month)
-day=str(s.day)
-
-if len(str(s.month))==1:
-    month=str(0)+str(s.month)
-
-if len(str(s.day))==1:
-    day=str(0)+str(s.day)
-
-today=month+day
+today=Today.today
 
 
 #企業ID
 companyID="109"+today
 houjin_kihon_CD = "HJ109"+today
-
-time.sleep(2)
 
 
 def test(driver):
