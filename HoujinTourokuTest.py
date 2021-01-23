@@ -7,6 +7,8 @@ import Today
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import time
+import Screenshot
+import Count
 
 #日付文字列取得（12/1ならtodayは1201となる)
 today=Today.get()
@@ -68,7 +70,12 @@ def test(driver):
     # 本社所在地入力　代表電話番号
     tel=driver.find_element_by_xpath("/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[4]/div[3]/div[2]/input")
     tel.send_keys("00000000000")
+    
 
+    #imgフォルダにスクリーンショットを保存
+    kinoumei="houjintouroku"
+    sfile = driver.get_screenshot_as_file("C:\\Users\\mano-syou\\Desktop\\python\\img\\"+today+kinoumei+"1"+".png")
+    time.sleep(3)
     
 
     # 登録
@@ -85,13 +92,13 @@ def test(driver):
 
     #imgフォルダにスクリーンショットを保存
     kinoumei="houjintouroku"
-    sfile = driver.get_screenshot_as_file("C:\\Users\\mano-syou\\Desktop\\python\\img\\"+today+kinoumei+".png")
+    sfile = driver.get_screenshot_as_file("C:\\Users\\mano-syou\\Desktop\\python\\img\\"+today+kinoumei+"2"+".png")
     time.sleep(3)
 
 
     #excelフォルダにhoujinエクセル作成
-    ex.make_xl(kinoumei)
+    ex.make_xl(kinoumei,2)
 
 
     #slack報告
-    postslack.SendToSlack(today+kinoumei+".xlsx",kinoumei)
+    postslack.SendToSlack(today+kinoumei+".xlsx","法人登録")

@@ -1,6 +1,8 @@
 import time
 import datetime
 
+number=0
+
 #日付文字列取得（12/1ならtodayは1201となる)
 s=datetime.datetime.now()
 

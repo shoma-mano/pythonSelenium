@@ -35,5 +35,5 @@ time.sleep(2)
 HoujinTourokuTest.test(driver)
 
 #取引先登録テスト
-TorihikisakiTourokuTest.test(driver)
+#TorihikisakiTourokuTest.test(driver)
 
