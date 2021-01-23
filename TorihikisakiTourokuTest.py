@@ -1,20 +1,22 @@
 import time
-import datetime
 import chromedriver_binary
 from selenium import webdriver
 import openpyxl
 import ex #make_xl(シート名,機能名)　で　/excelにexcelファイルを作成
 import postslack
 import scroll
+import Count
+import Screenshot
+import Today
 from selenium.webdriver.common.action_chains import ActionChains
 
 
 today=Today.today
 
 
-#企業ID
-companyID="109"+today
-houjin_kihon_CD = "HJ109"+today
+#入力事項
+companyID="999"+today
+houjin_kihon_CD = "HJ999"+today
 
 
 def test(driver):
@@ -50,6 +52,12 @@ def test(driver):
     driver.find_element_by_xpath("/html/body/app-root/app-main-layout/div/div/app-b15f0220/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/div/form/div[4]/div[1]/div[2]/p-dropdown/div/div[2]/span").click()
     time.sleep(4)
     driver.find_element_by_xpath("/html/body/app-root/app-main-layout/div/div/app-b15f0220/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/div/form/div[4]/div[1]/div[2]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[2]/li/span").click()
+    
+    #imgフォルダにスクリーンショットを保存
+    torihikisakitouroku=Count.makeCountObj("取引先登録")
+    Screenshot.excute(driver,torihikisakitouroku)
+    time.sleep(3)
+
 
     #登録
     touroku=driver.find_element_by_xpath("/html/body/app-root/app-main-layout/div/div/app-b15f0220/ps-container/div/ps-footer/div/div[2]/button")
@@ -61,14 +69,13 @@ def test(driver):
     time.sleep(3)
 
     #imgフォルダにスクリーンショットを保存
-    kinoumei="torihikisakitouroku"
-    sfile = driver.get_screenshot_as_file("C:\\Users\\mano-syou\\Desktop\\python\\img\\"+today+kinoumei+".png")
+    Screenshot.excute(driver,torihikisakitouroku)
     time.sleep(3)
 
 
     #excelフォルダにhoujinエクセル作成
-    ex.make_xl(kinoumei)
+    ex.make_xl(torihikisakitouroku.name,torihikisakitouroku.number)
 
 
     #slack報告
-    postslack.SendToSlack(today+kinoumei+".xlsx",kinoumei)
+    postslack.SendToSlack(today+torihikisakitouroku.name+".xlsx",torihikisakitouroku.name)

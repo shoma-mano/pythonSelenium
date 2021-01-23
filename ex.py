@@ -24,12 +24,11 @@ def make_xl(kinoumei,number):
     #         i += 1
     number+=1
     for i in range(1,number):
-        img = Image("img\\"+today+kinoumei+str(i)+".png")
+        img = Image("img\\"+kinoumei+str(i)+".png")
         img.width = 72 * 7
         img.height = 38 * 10
         sheet.add_image(img, 'D'+str(25*(i-1)+1))
 
     # ワークブックに名前をつけて保存する
-    book.save("excel\\"+today+kinoumei+'.xlsx')
-
-make_xl("houjintouroku",2)
+    book.save("excel\\"+kinoumei+'.xlsx')
+    print("エクセルを作成しました")

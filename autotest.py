@@ -3,7 +3,6 @@ import datetime
 import chromedriver_binary
 from selenium import webdriver
 import openpyxl
-import ex #make_xl(機能名)で/excelにexcelファイルを作成
 import postslack #SendToSlack(エクセル名、メッセージ名）slackに報告
 import TorihikisakiTourokuTest
 import HoujinTourokuTest
@@ -35,5 +34,5 @@ time.sleep(2)
 HoujinTourokuTest.test(driver)
 
 #取引先登録テスト
-#TorihikisakiTourokuTest.test(driver)
+TorihikisakiTourokuTest.test(driver)
 

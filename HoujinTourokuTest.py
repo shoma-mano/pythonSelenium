@@ -13,9 +13,8 @@ import Count
 #日付文字列取得（12/1ならtodayは1201となる)
 today=Today.get()
 
-#企業ID
-companyID="109"+today
-
+#入力事項
+companyID="999"+today
 
 
 def test(driver):
@@ -73,8 +72,8 @@ def test(driver):
     
 
     #imgフォルダにスクリーンショットを保存
-    houjintouroku=Count.makeCountObj("法人登録")
-    Screenshot.excute(houjintouroku,driver)
+    houjintouroku=Count.makeCountObj(today+"法人登録")
+    Screenshot.excute(driver,houjintouroku)
     time.sleep(3)
     
 
@@ -83,20 +82,22 @@ def test(driver):
     scroll.scroll(driver,houjin_touroku)
     houjin_touroku.click()
     time.sleep(1)
-
+   
     houjin_touroku=driver.find_element_by_xpath("/html/body/app-dialog/div/div/div[3]/button[1]")
     houjin_touroku.click()
+    time.sleep(3)
+    message= driver.find_element_by_xpath("/html/body/div[1]/div/div[2]/span")
+    if ('エラー' in message.text):
+        print(エラーを検出しました)
+        houjintouroku.result="エラー"
 
+    #imgフォルダにスクリーンショットを保存
+    Screenshot.excute(driver,houjintouroku)
     time.sleep(3)
 
 
     #imgフォルダにスクリーンショットを保存
-    Screenshot.excute(houjintouroku,driver)
-    time.sleep(3)
-
-
-    #imgフォルダにスクリーンショットを保存
-    Screenshot.excute(houjintouroku,driver)
+    Screenshot.excute(driver,houjintouroku)
     time.sleep(3)
 
 
@@ -105,4 +106,4 @@ def test(driver):
 
 
     #slack報告
-    postslack.SendToSlack(today+houjintouroku.name+".xlsx","法人登録")
+    postslack.SendToSlack(houjintouroku.name+".xlsx","法人登録")

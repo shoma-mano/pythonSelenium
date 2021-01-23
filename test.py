@@ -1,8 +1,4 @@
-import Today
-import Screenshot
-import Count
+a="0"
 
-houjin=Count.makeCountObj("houjin")
-
-Screenshot.excute(houjin)
-Screenshot.excute(houjin)
+if a:
+    print("ok")
