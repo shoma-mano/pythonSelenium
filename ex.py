@@ -18,7 +18,7 @@ today=month+day
 
 
 
-def make_xl(kinoumei):
+def make_xl(kinoumei,number):
     # ワークブックを新規作成する
     book = openpyxl.Workbook()
 
@@ -33,11 +33,11 @@ def make_xl(kinoumei):
     #     for cell in row:
     #         cell.value = i # セルに値を設定する
     #         i += 1
-
-    img = Image("img\\"+today+kinoumei+".png")
-    img.width = 72 * 7
-    img.height = 38 * 10
-    sheet.add_image(img, 'D1')
+    for i in range(1,number)
+        img = Image("img\\"+today+kinoumei+i+".png")
+        img.width = 72 * 7
+        img.height = 38 * 10
+        sheet.add_image(img, 'D'+str(25*(i-1)))
 
     # ワークブックに名前をつけて保存する
     book.save("excel\\"+today+kinoumei+'.xlsx')

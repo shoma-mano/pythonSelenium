@@ -5,6 +5,7 @@ from selenium import webdriver
 import openpyxl
 import ex #make_xl(シート名,機能名)　で　/excelにexcelファイルを作成
 import postslack
+import scroll
 from selenium.webdriver.common.action_chains import ActionChains
 
 #日付文字列取得（12/1ならtodayは1201となる)
@@ -64,7 +65,9 @@ def test(driver):
     driver.find_element_by_xpath("/html/body/app-root/app-main-layout/div/div/app-b15f0220/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/div/form/div[4]/div[1]/div[2]/p-dropdown/div/div[4]/div/ul/p-dropdownitem[2]/li/span").click()
 
     #登録
-    driver.find_element_by_xpath("/html/body/app-root/app-main-layout/div/div/app-b15f0220/ps-container/div/ps-footer/div/div[2]/button").click()
+    touroku=driver.find_element_by_xpath("/html/body/app-root/app-main-layout/div/div/app-b15f0220/ps-container/div/ps-footer/div/div[2]/button")
+    scroll.scroll(driver,touroku)
+    touroku.click()
     time.sleep(2)
     driver.find_element_by_xpath("/html/body/app-dialog/div/div/div[3]/button[1]").click()
 
