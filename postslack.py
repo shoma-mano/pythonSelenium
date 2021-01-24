@@ -4,12 +4,14 @@ import slackweb
 import os
 import requests
 
-def SendToSlack(filename, message):
+def SendToSlack(kinoumei, message):
  
     # Slackへの投稿に必要は情報を設定
     token = 'xoxp-1174239099089-1399634450978-1643779448311-7e26c9f71eac0a1b00e852387eb229f6'
     channel = 'C01BS0J2HL3'
-    text = message + '\n\n成功'
+    text = message + ':成功'
+    if(kinoumei.result=="エラー"):
+      text = message + ':エラー'+'\n\nエラーメッセージ:'+kinoumei.message
  
     param ={
         'token': token,
@@ -18,7 +20,7 @@ def SendToSlack(filename, message):
       }
  
     # 投稿するExcelファイルを絶対パスを取得
-    fullpath = os.path.join(os.getcwd()+"\\excel", filename)
+    fullpath = os.path.join(os.getcwd()+"\\excel", kinoumei.name+".xlsx")
     files = {'file': open(fullpath, 'rb')}
  
     # SlackへExcelファイルを投稿

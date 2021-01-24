@@ -9,6 +9,7 @@ import Count
 import Screenshot
 import Today
 from selenium.webdriver.common.action_chains import ActionChains
+import DetectError
 
 
 today=Today.today
@@ -68,6 +69,10 @@ def test(driver):
 
     time.sleep(3)
 
+    #エラー検出
+    DetectError.excute(driver,torihikisakitouroku)
+
+
     #imgフォルダにスクリーンショットを保存
     Screenshot.excute(driver,torihikisakitouroku)
     time.sleep(3)
@@ -78,4 +83,4 @@ def test(driver):
 
 
     #slack報告
-    postslack.SendToSlack(today+torihikisakitouroku.name+".xlsx",torihikisakitouroku.name)
+    postslack.SendToSlack(torihikisakitouroku,"取引先登録")

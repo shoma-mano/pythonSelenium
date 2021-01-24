@@ -1,21 +1,20 @@
 from selenium import webdriver
-import openpyxl
 import ex #make_xl(シート名,機能名)　で　/excelにexcelファイルを作成
 import postslack
 import scroll
 import Today
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
 import time
 import Screenshot
 import Count
+import DetectError
 
 #日付文字列取得（12/1ならtodayは1201となる)
 today=Today.get()
 
 #入力事項
 companyID="999"+today
-
+houjin_kihon_CD = "HJ999"+today
 
 def test(driver):
     #法人登録テスト
@@ -35,8 +34,7 @@ def test(driver):
     houjin_kihon_CD_element=driver.find_element_by_xpath("/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[2]/div[1]/div[2]/input")
     # houjinCD="HJ109"+today
     # houjin_kihon_CD.send_keys(houjinCD)
-    houjin_kihon_CD = "HJ109"+today
-    houjin_kihon_CD_element.send_keys("HJ109"+today)
+    houjin_kihon_CD_element.send_keys(houjin_kihon_CD)
 
 
     # 法人名入力
@@ -72,7 +70,7 @@ def test(driver):
     
 
     #imgフォルダにスクリーンショットを保存
-    houjintouroku=Count.makeCountObj(today+"法人登録")
+    houjintouroku=Count.makeCountObj("法人登録")
     Screenshot.excute(driver,houjintouroku)
     time.sleep(3)
     
@@ -82,19 +80,12 @@ def test(driver):
     scroll.scroll(driver,houjin_touroku)
     houjin_touroku.click()
     time.sleep(1)
-   
     houjin_touroku=driver.find_element_by_xpath("/html/body/app-dialog/div/div/div[3]/button[1]")
     houjin_touroku.click()
     time.sleep(3)
-    message= driver.find_element_by_xpath("/html/body/div[1]/div/div[2]/span")
-    if ('エラー' in message.text):
-        print(エラーを検出しました)
-        houjintouroku.result="エラー"
 
-    #imgフォルダにスクリーンショットを保存
-    Screenshot.excute(driver,houjintouroku)
-    time.sleep(3)
-
+    #エラー検出
+    DetectError.excute(driver,houjintouroku)
 
     #imgフォルダにスクリーンショットを保存
     Screenshot.excute(driver,houjintouroku)
@@ -106,4 +97,4 @@ def test(driver):
 
 
     #slack報告
-    postslack.SendToSlack(houjintouroku.name+".xlsx","法人登録")
+    postslack.SendToSlack(houjintouroku,"法人登録")
