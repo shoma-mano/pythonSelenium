@@ -9,10 +9,10 @@ today=Today.get()
 #入力事項
 
 #企業ID
-companyID="990"+today
+companyID="988"+today
 
 #法人基本CD
-houjin_kihon_CD = "HJ990"+today
+houjin_kihon_CD = "HJ988"+today
 
 #期待結果（期待結果が含まれていれば成功）
 expectedmessage="登録しました"

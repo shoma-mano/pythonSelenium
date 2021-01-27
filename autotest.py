@@ -2,7 +2,7 @@ import time
 import chromedriver_binary
 from selenium import webdriver
 from testparts_module import kokyakuopen,Login
-from test_module import HoujinTourokuTest,TorihikisakiTourokuTest,SeikyuSakiTourokuTest
+from test_module import HoujinTourokuTest,TorihikisakiTourokuTest,SeikyuSakiTourokuTest,TorimatomeKigyouHozonTest
 
 
 #chromeドライバー取得
@@ -24,3 +24,5 @@ TorihikisakiTourokuTest.test(driver)
 #請求先登録テスト
 SeikyuSakiTourokuTest.test(driver)
 
+#取纏企業新規保存テスト
+TorimatomeKigyouHozonTest.test(driver)

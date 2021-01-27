@@ -9,10 +9,10 @@ today=Today.today
 #入力項目（エクセルから入力可能にする予定）
 
 #企業ID
-companyID="990"+today
+companyID="988"+today
 
 #法人基本CD
-houjin_kihon_CD = "HJ990"+today
+houjin_kihon_CD = "HJ988"+today
 
 #取引先名
 torihikisakimei="取引先"+companyID

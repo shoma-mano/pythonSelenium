@@ -8,10 +8,10 @@ from common_module import move,sendkey,DetectError,Count,ex,postslack,Screenshot
 today=Today.today
 
 #企業ID
-companyID="990"+today
+companyID="988"+today
 
 #請求先CD
-seikyusakiCD="990"+today
+seikyusakiCD="988"+today
 
 #連携会計取引先CD
 renkeikaikeitorihikisakiCD="K"+companyID
