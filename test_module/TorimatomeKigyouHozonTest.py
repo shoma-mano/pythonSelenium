@@ -5,23 +5,26 @@ from common_module import move,sendkey,DetectError,Count,ex,postslack,Screenshot
 
 today=Today.today
 
-#企業ID
-companyID="988"+today
-
-#メールアドレス
-email="ms2@com"
-
-#契約名
-keiyakuMei="取り纏め"+companyID
-
-#郵便番号
-yuubinCD="1330056"
 
 #期待結果（期待結果が含まれていれば成功）
 expectedmessage="登録しました"
 
 #取纏幹事企業登録テスト
-def test(driver):
+def test(driver,data):
+    #企業ID
+    companyID=data.companyID
+
+    #法人基本CD
+    houjin_kihon_CD =data.houjin_kihon_CD
+
+    #メールアドレス
+    email=data.email
+
+    #契約名
+    torimatomekeiyakuMei=data.torimatomekeiyakuMei
+
+    #郵便番号
+    yuubinCD=data.yuubinCD
 
     #movinostar契約一覧ページに移動
     move.excute(driver,"/html/body/app-root/app-main-layout/div/sa-navigation/aside/nav/ul/li[3]/ul/li[5]/a")
@@ -39,7 +42,7 @@ def test(driver):
     move.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b60f0610_1/ps-container/div/ps-body/div/div/ps-panel[2]/div/div[2]/div/div/div[1]/div/div/p-calendar/span/div/div[2]/a[1]")
  
     # 契約名入力
-    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b60f0610_1/ps-container/div/ps-body/div/div/ps-panel[2]/div/div[2]/div/div/div[2]/div[1]/div/input",keiyakuMei)
+    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b60f0610_1/ps-container/div/ps-body/div/div/ps-panel[2]/div/div[2]/div/div/div[2]/div[1]/div/input",torimatomekeiyakuMei)
 
     # 住所入力
     sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b60f0610_1/ps-container/div/ps-body/div/div/ps-panel[2]/div/div[2]/div/div/div[4]/div[1]/div/input","住所"+companyID)

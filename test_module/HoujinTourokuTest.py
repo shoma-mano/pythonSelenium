@@ -3,21 +3,37 @@ from selenium.webdriver.common.action_chains import ActionChains
 import time
 from common_module import move,sendkey,DetectError,Count,ex,postslack,Screenshot,Today,scroll,DetectSuccess
 
-#日付文字列取得（12/1ならtodayは1201となる)
+#日付文字列取得
 today=Today.get()
-
-#入力事項
-
-#企業ID
-companyID="988"+today
-
-#法人基本CD
-houjin_kihon_CD = "HJ988"+today
 
 #期待結果（期待結果が含まれていれば成功）
 expectedmessage="登録しました"
 
-def test(driver):
+def test(driver,data):
+    #入力事項
+
+    #企業ID
+    companyID = data.companyID
+
+    #法人基本CD
+    houjin_kihon_CD = data.houjin_kihon_CD
+
+    #法人名
+    houjinMei = data.houjinMei
+
+    #住所
+    address = data.address
+
+    #ビル名
+    billMei = data.billMei
+
+    #カナ法人名
+    kanahoujinMei =data.kanahoujinMei
+
+    #代表電話番号
+    telNo = data.telNo
+
+
     #法人登録テスト
     #法人ページに移動
     move.excute(driver,"/html/body/app-root/app-main-layout/div/sa-navigation/aside/nav/ul/li[3]/ul/li[2]")
@@ -29,23 +45,23 @@ def test(driver):
     sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[2]/div[1]/div[2]/input",houjin_kihon_CD)
 
     # 法人名入力
-    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[3]/div[1]/div[2]/input",houjin_kihon_CD+"test")
+    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[3]/div[1]/div[2]/input",houjinMei)
 
-    # 本社所在地入力(郵便番号のみ自動入力不可能)
+    # (郵便番号のみ自動入力不可能)
     # yuubin=driver.find_element_by_xpath("/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[4]/div[1]/div[2]/div/input")
     # yuubin.click()
  
-    # 本社所在地入力 住所
-    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[5]/div[1]/div[2]/input","住所"+today)
+    # 住所入力
+    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[5]/div[1]/div[2]/input",address)
 
-    # 本社所在地入力 ビル名
-    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[6]/div[1]/div[2]/input","ビル"+today)
+    #ビル名入力
+    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[6]/div[1]/div[2]/input",billMei)
 
-    # 本社所在地入力 カナ法人名
-    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[3]/div[3]/div[2]/input","テスト"+today)
+    # カナ法人名入力
+    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[3]/div[3]/div[2]/input",kanahoujinMei)
 
-    # 本社所在地入力　代表電話番号
-    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[4]/div[3]/div[2]/input","00000000000")
+    # 代表電話番号入力
+    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[4]/div[3]/div[2]/input",telNo)
     
     #imgフォルダにスクリーンショットを保存
     houjintouroku=Count.makeCountObj("法人登録",expectedmessage)

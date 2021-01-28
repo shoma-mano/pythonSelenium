@@ -9,7 +9,7 @@ def SendToSlack(kinoumei, message):
     # Slackへの投稿に必要は情報を設定
     token = 'xoxp-1174239099089-1399634450978-1643779448311-7e26c9f71eac0a1b00e852387eb229f6'
     channel = 'C01BS0J2HL3'
-    text = message + ':期待通りの出力が得られませんでした'+'\n\n期待結果：'+kinoumei.expectedmessage+'\n\n出力結果：'+kinoumei.message
+    text = message + ':*期待通りの出力が得られませんでした*'+'\n\n期待結果：'+kinoumei.expectedmessage+'\n\n出力結果：'+kinoumei.message
     if(kinoumei.result=="エラー"):
       text = message + ':エラー'+'\n\nエラーメッセージ:'+kinoumei.message
     if(kinoumei.result=="成功"):
