@@ -42,3 +42,4 @@ class makeTestDataObj:
     yuubinCD="1330056"
     #テスト結果
     result={"法人":{"登録":"","読込":"","更新":"","削除":""}}
+    #pullreq
