@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 import time
-from common_module import move,sendkey,DetectError,Count,ex,postslack,Screenshot,Today,scroll,DetectSuccess
+from common_module import move,sendkey,DetectError,Count,ex,postslack,Screenshot,Today,scroll,DetectSuccess,DeleteText
 
 #日付文字列取得（12/1ならtodayは1201となる)
 today=Today.get()
@@ -25,6 +25,7 @@ def test(driver,data):
     move.excute(driver,"/html/body/app-root/app-main-layout/div/sa-navigation/aside/nav/ul/li[3]/ul/li[2]")
     
     #法人CD入力して検索
+    DeleteText.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0110/ps-container/div/ps-body/div/div/input")
     sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0110/ps-container/div/ps-body/div/div/input",houjin_kihon_CD)
     move.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0110/ps-container/div/ps-body/div/div/button")
 
@@ -32,7 +33,7 @@ def test(driver,data):
     move.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0110/ps-container/div/ps-body/div/ps-panel[2]/div/div[2]/div/p-table/div/div/div/div[2]/table/tbody/tr/td[1]/button/i")
 
     #imgフォルダにスクリーンショットを保存
-    houjinsakuzyo=Count.makeCountObj("法人削除",expectedmessage)
+    houjinsakuzyo=Count.makeCountObj("法人","削除",expectedmessage)
     time.sleep(1)
     Screenshot.excute(driver,houjinsakuzyo)
     
@@ -43,8 +44,13 @@ def test(driver,data):
 
     #結果チェック
     DetectSuccess.excute(driver,houjinsakuzyo)
-    sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0110/ps-container/div/ps-body/div/div/input",houjin_kihon_CD)
     move.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0110/ps-container/div/ps-body/div/div/button")
+
+    #実施数カウント
+    data.number+=1
+
+    #結果登録
+    data.result[houjinsakuzyo.testname][houjinsakuzyo.testtype]=houjinsakuzyo.result
 
     #imgフォルダにスクリーンショットを保存
     Screenshot.excute(driver,houjinsakuzyo)

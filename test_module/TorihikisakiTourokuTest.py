@@ -13,7 +13,7 @@ expectedmessage="登録しました"
  #取引先登録テスト
 def test(driver,data):
 
-    #入力項目（エクセルから入力可能にする予定）
+    #入力項目
 
     #企業ID
     companyID = data.companyID
@@ -65,7 +65,7 @@ def test(driver,data):
     sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0220/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/div/form/div[6]/div[1]/div[2]/input",renkeikaikeitorihikisakiCD)
 
     #imgフォルダにスクリーンショットを保存
-    torihikisakitouroku=Count.makeCountObj("取引先登録",expectedmessage)
+    torihikisakitouroku=Count.makeCountObj("取引先","登録",expectedmessage)
     Screenshot.excute(driver,torihikisakitouroku)
     time.sleep(3)
 
@@ -78,6 +78,9 @@ def test(driver,data):
 
     #エラー検出
     DetectSuccess.excute(driver,torihikisakitouroku)
+
+    #結果登録
+    data.result[torihikisakitouroku.testname][torihikisakitouroku.testtype]=torihikisakitouroku.result
 
     #imgフォルダにスクリーンショットを保存
     Screenshot.excute(driver,torihikisakitouroku)

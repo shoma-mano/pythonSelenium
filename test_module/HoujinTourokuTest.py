@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 import time
-from common_module import move,sendkey,DetectError,Count,ex,postslack,Screenshot,Today,scroll,DetectSuccess
+from common_module import move,sendkey,DetectError,Count,ex,postslack,Screenshot,Today,scroll,DetectSuccess,reportexcel
 
 #日付文字列取得
 today=Today.get()
@@ -39,7 +39,7 @@ def test(driver,data):
     move.excute(driver,"/html/body/app-root/app-main-layout/div/sa-navigation/aside/nav/ul/li[3]/ul/li[2]")
     
     #新規ページに移動
-    move.excute(driver,"/html/body[@class='desktop-detected ng-tns-0-1 smart-style-9']/app-root/app-main-layout[@class='ng-star-inserted']/div[@class='ng-star-inserted']/div[@id='main']/app-b15f0110[@class='ng-star-inserted']/ps-container/div[@class='padding-20']/ps-body/div/ps-panel[@class='ng-tns-c91-4 ng-star-inserted']/div[@class='ng-tns-c91-4 panel']/div[@class='ng-tns-c91-4 panel-container']/div[@class='ng-tns-c91-4 ng-trigger ng-trigger-slideInOut ng-star-inserted panel-content']/div[@class='margin-b-10 ng-tns-c91-4']/div[2]/button[@class='btn btn-action'][2]")
+    move.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0110/ps-container/div/ps-body/div/ps-panel[2]/div/div[2]/div/div/div[2]/button[2]")
 
     # 法人基本CD入力
     sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[2]/div[1]/div[2]/input",houjin_kihon_CD)
@@ -64,7 +64,7 @@ def test(driver,data):
     sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0120/ps-container/div/ps-body/div/ps-panel/div/div[2]/div/form/div/div[4]/div[3]/div[2]/input",telNo)
     
     #imgフォルダにスクリーンショットを保存
-    houjintouroku=Count.makeCountObj("法人登録",expectedmessage)
+    houjintouroku=Count.makeCountObj("法人","登録",expectedmessage)
     Screenshot.excute(driver,houjintouroku)
     
 
@@ -78,11 +78,16 @@ def test(driver,data):
     #結果チェック
     DetectSuccess.excute(driver,houjintouroku)
 
+    #結果登録
+    data.result[houjintouroku.testname][houjintouroku.testtype]=houjintouroku.result
+    
     #imgフォルダにスクリーンショットを保存
     Screenshot.excute(driver,houjintouroku)
 
     #excelフォルダにhoujinエクセル作成
     ex.make_xl(houjintouroku)
+
+    
 
 
     #slack報告

@@ -51,7 +51,7 @@ def test(driver,data):
     sendkey.excute(driver,"/html/body/app-root/app-main-layout/div/div/app-b15f0320/ps-container/div/ps-body/div/form/ps-panel[1]/div/div[2]/div/div[3]/div[1]/div[2]/input",kaikeitorihikisakiCD)
 
     #imgフォルダにスクリーンショットを保存
-    seikyusakitouroku=Count.makeCountObj("請求先登録",expectedmessage)
+    seikyusakitouroku=Count.makeCountObj("請求先","登録",expectedmessage)
     Screenshot.excute(driver,seikyusakitouroku)
     time.sleep(1)
 
@@ -94,6 +94,9 @@ def test(driver,data):
 
     #エラー検出
     DetectSuccess.excute(driver,seikyusakitouroku,)
+
+    #結果登録
+    data.result[seikyusakitouroku.testname][seikyusakitouroku.testtype]=seikyusakitouroku.result
 
     #imgフォルダにスクリーンショットを保存
     Screenshot.excute(driver,seikyusakitouroku)

@@ -30,5 +30,5 @@ def make_xl(kinoumei):
         sheet.add_image(img, 'D'+str(25*(i-1)+1))
 
     # ワークブックに名前をつけて保存する
-    book.save("excel\\"+kinoumei.name+'.xlsx')
+    book.save("excel\\"+kinoumei.name+kinoumei.testtype+'.xlsx')
     print("エクセルを作成しました")
