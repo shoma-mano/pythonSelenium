@@ -8,7 +8,6 @@ from common_module import TestDataObject,reportexcel
 from testcode_module import postslacktest
 
 
-postslacktest.execute()
 # #chromeドライバー取得
 # driver = webdriver.Chrome()
 # driver.get('https://it.stellamock.com/#/tglogin')
@@ -16,20 +15,6 @@ postslacktest.execute()
 # #ログイン画面を開いてログイン
 # Login.login(driver)
 
-# #顧客情報メニューを開く
-# kokyakuopen.excute(driver)
-
-# #テストデータ作成
-# data=TestDataObject.makeTestDataObj()
-
-# #法人登録テスト
-# HoujinTourokuTest.test(driver,data)
-
-# #法人編集テスト
-# HoujinHensyuTest.test(driver,data)
-
-# #法人削除(無効化)テスト
-# HoujinSakuzyoTest.test(driver,data)
 
 # #結果報告
 # reportexcel.excute(data)
